@@ -23,7 +23,7 @@ def g():
     titanic_fg = fs.get_or_create_feature_group(
         name="titanic_modal",
         version=1,
-        primary_key=["PassengerId"], 
+        primary_key=['Sex_female', 'Sex_male', 'Embarked_C', 'Embarked_Q', 'Embarked_S', 'Age_Group', 'SibSp', 'Parch', 'Fare', 'Pclass'], 
         description="Titanic survival dataset")
     titanic_fg.insert(titanic_df_processed, write_options={"wait_for_job" : False})
 

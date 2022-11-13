@@ -46,7 +46,7 @@ def get_ct_feature_names(ct):
 
 def preprocessing_titanic(titanic_df):
 
-    titanic_df.drop(columns=['Name', 'Ticket', 'Cabin'], inplace=True)
+    titanic_df.drop(columns=['PassengerId', 'Name', 'Ticket', 'Cabin'], inplace=True)
 
     # Turn 'Age' column into groups
     age_conditions = [
@@ -68,8 +68,7 @@ def preprocessing_titanic(titanic_df):
                                                 OneHotEncoder(sparse=False, handle_unknown='ignore')
                                                 )
 
-    t = [('do_nothing', SimpleImputer(strategy='most_frequent'), ['PassengerId']),
-         ('ohe-cat', OneHotEncoder(sparse=False, handle_unknown='ignore'), ['Sex']),
+    t = [('ohe-cat', OneHotEncoder(sparse=False, handle_unknown='ignore'), ['Sex']),
          ('mode-impute', mode_impute_onehot_pipeline, ['Embarked']),
          ('mode', SimpleImputer(strategy='most_frequent'), ['Age_Group']),
          ('do_nothing2', SimpleImputer(strategy='most_frequent'), ['SibSp', 'Parch', 'Fare', 'Pclass', 'Survived'])
