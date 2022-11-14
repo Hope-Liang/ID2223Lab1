@@ -60,21 +60,25 @@ def get_random_iris_flower():
 def g():
     import hopsworks
     import pandas as pd
+    from preprocessor_pipeline import preprocessing_titanic
 
     project = hopsworks.login()
     fs = project.get_feature_store()
 
     if BACKFILL == True:
-        iris_df = pd.read_csv("https://repo.hops.works/master/hopsworks-tutorials/data/iris.csv")
+        titanic_df = pd.read_csv("https://raw.githubusercontent.com/ID2223KTH/id2223kth.github.io/master/assignments/lab1/titanic.csv")
+        titanic_df = preprocessing_titanic(titanic_df)
     else:
-        iris_df = get_random_iris_flower()
+        iris_df = get_random_titanic_passenger()
 
-    iris_fg = fs.get_or_create_feature_group(
-        name="iris_modal",
+    titanic_fg = fs.get_or_create_feature_group(
+        name="titanic_modal",
         version=1,
-        primary_key=["sepal_length","sepal_width","petal_length","petal_width"], 
-        description="Iris flower dataset")
-    iris_fg.insert(iris_df, write_options={"wait_for_job" : False})
+        primary_key=['Sex_female', 'Sex_male', 'Embarked_C', 'Embarked_Q', 'Embarked_S', 'Age_Group', 'SibSp', 'Parch', 'Fare', 'Pclass'], 
+        description="Titanic survival dataset")
+    titanic_fg.insert(titanic_df, write_options={"wait_for_job" : False})
+
+
 
 if __name__ == "__main__":
     if LOCAL == True :
