@@ -49,12 +49,12 @@ def g():
     img = Image.open(requests.get(survival_url, stream=True).raw)            
     img.save("./latest_survival.png")
     dataset_api = project.get_dataset_api()    
-    dataset_api.upload("./latest_survival.png", "Resources/images", overwrite=True)
+    dataset_api.upload("./latest_survival.png", "Resources/images-titanic", overwrite=True)
     
     titanic_fg = fs.get_feature_group(name="titanic_modal", version=1)
     df = titanic_fg.read()
-    # print(df["variety"])
-    label = df.iloc[-1]["Survived"]
+    # print(df["survived"])
+    label = df.iloc[-1]["survived"]
     if label == 1.0:
         label_url = "https://raw.githubusercontent.com/Hope-Liang/ID2223Lab1/main/serverless-ml-titanic/images/survived.png"
         print("Survival actual: Survived.")
@@ -65,7 +65,7 @@ def g():
         label_str = "died"
     img = Image.open(requests.get(label_url, stream=True).raw)            
     img.save("./actual_survival.png")
-    dataset_api.upload("./actual_survival.png", "Resources/images", overwrite=True)
+    dataset_api.upload("./actual_survival.png", "Resources/images-titanic", overwrite=True)
     
     monitor_fg = fs.get_or_create_feature_group(name="titanic_predictions",
                                                 version=1,
@@ -90,7 +90,7 @@ def g():
 
     df_recent = history_df.tail(5)
     dfi.export(df_recent, './df_recent.png', table_conversion = 'matplotlib')
-    dataset_api.upload("./df_recent.png", "Resources/images", overwrite=True)
+    dataset_api.upload("./df_recent.png", "Resources/images-titanic", overwrite=True)
     
     predictions = history_df[['prediction']]
     labels = history_df[['label']]
@@ -106,7 +106,7 @@ def g():
         cm = sns.heatmap(df_cm, annot=True)
         fig = cm.get_figure()
         fig.savefig("./confusion_matrix.png")
-        dataset_api.upload("./confusion_matrix.png", "Resources/images", overwrite=True)
+        dataset_api.upload("./confusion_matrix.png", "Resources/images-titanic", overwrite=True)
     else:
         print("You need 2 different survival predictions to create the confusion matrix.")
         print("Run the batch inference pipeline more times until you get 2 different titanic survival predictions") 
