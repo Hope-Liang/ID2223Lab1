@@ -33,7 +33,7 @@ def generate_passenger(survived, p_male, p_embark_c, p_embark_q, p_age_1, p_age_
         embarked_c = 1.0
         embarked_q = 0.0
         embarked_s = 0.0
-    elif embarked_c < p_embark_c+p_embark_q:
+    elif embarked_rand < p_embark_c+p_embark_q:
         embarked_c = 0.0
         embarked_q = 1.0
         embarked_s = 0.0
