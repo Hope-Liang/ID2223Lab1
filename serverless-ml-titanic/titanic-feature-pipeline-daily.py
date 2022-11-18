@@ -13,47 +13,88 @@ if LOCAL == False:
        g()
 
 
-def generate_flower(name, sepal_len_max, sepal_len_min, sepal_width_max, sepal_width_min, 
-                    petal_len_max, petal_len_min, petal_width_max, petal_width_min):
+def generate_passenger(survived, p_male, p_embark_c, p_embark_q, p_age_1, p_age_2, max_sibsp, max_parch, fare_min, fare_max, p_class_1, p_class_2):
     """
-    Returns a single iris flower as a single row in a DataFrame
+    Returns a single passenger as a single row in a DataFrame
     """
     import pandas as pd
     import random
 
-    df = pd.DataFrame({ "sepal_length": [random.uniform(sepal_len_max, sepal_len_min)],
-                       "sepal_width": [random.uniform(sepal_width_max, sepal_width_min)],
-                       "petal_length": [random.uniform(petal_len_max, petal_len_min)],
-                       "petal_width": [random.uniform(petal_width_max, petal_width_min)]
-                      })
-    df['variety'] = name
+    sex_rand = random.uniform(0,1)
+    if sex_rand < p_male:
+        sex_female = 0.0
+        sex_male = 1.0
+    else:
+        sex_female = 1.0
+        sex_male = 0.0
+
+    embark_rand = random.uniform(0,1)
+    if embark_rand < p_embark_c:
+        embarked_c = 1.0
+        embarked_q = 0.0
+        embarked_s = 0.0
+    elif embarked_c < p_embark_c+p_embark_q:
+        embarked_c = 0.0
+        embarked_q = 1.0
+        embarked_s = 0.0
+    else:
+        embarked_c = 0.0
+        embarked_q = 0.0
+        embarked_s = 1.0
+
+    age_rand = random.uniform(0,1)
+    if age_rand < p_age_1:
+        age_group = 1.0
+    elif age_rand < p_age_1 + p_age_2:
+        age_group = 2.0
+    else:
+        age_group = 3.0
+
+    pclass_rand = random.uniform(0,1)
+    if pclass_rand < p_class_1:
+        pclass = 1.0
+    elif pclass_rand < p_class_1 + p_class_2:
+        pclass = 2.0
+    else:
+        pclass = 3.0
+
+    df = pd.DataFrame({"Sex_female": [sex_female],
+                        "Sex_male": [sex_male],
+                        "Embarked_C": [embarked_c],
+                        "Embarked_Q": [embarked_q],
+                        "Embarked_S": [embarked_s],
+                        "Age_Group": [age_group],
+                        "Sibsp": [float(random.randint(0,max_sibsp))],
+                        "Parch": [float(random.randint(0,max_parch))],
+                        "Fare": [random.uniform(fare_max, fare_min)],
+                        "Pclass": [pclass]
+                    })
+    df['Survived'] = survived
     return df
 
 
-def get_random_iris_flower():
+def get_random_titanic_passenger():
     """
-    Returns a DataFrame containing one random iris flower
+    Returns a DataFrame containing one random titanic passenger
     """
     import pandas as pd
     import random
 
-    virginica_df = generate_flower("Virginica", 8, 5.5, 3.8, 2.2, 7, 4.5, 2.5, 1.4)
-    versicolor_df = generate_flower("Versicolor", 7.5, 4.5, 3.5, 2.1, 3.1, 5.5, 1.8, 1.0)
-    setosa_df =  generate_flower("Setosa", 6, 4.5, 4.5, 2.3, 1.2, 2, 0.7, 0.3)
+    survived_df = generate_passenger(1.0, p_male=0.3187, p_embark_c=0.2719, p_embark_q=0.0877, p_age_1=0.1784, p_age_2=0.7836, 
+                                    max_sibsp=4.0, max_parch=5.0, fare_min=0.0, fare_max=512.3292, p_class_1=0.3977, p_class_2=0.2544)
+    died_df = generate_passenger(0.0, p_male=0.8525, p_embark_c=0.1366, p_embark_q=0.0856, p_age_1=0.0947, p_age_2=0.8525, 
+                                    max_sibsp=8.0, max_parch=6.0, fare_min=0.0, fare_max=263.0, p_class_1=0.1457, p_class_2=0.1767)
 
-    # randomly pick one of these 3 and write it to the featurestore
-    pick_random = random.uniform(0,3)
-    if pick_random >= 2:
-        iris_df = virginica_df
-        print("Virginica added")
-    elif pick_random >= 1:
-        iris_df = versicolor_df
-        print("Versicolor added")
+    # randomly pick one of these 2 and write it to the featurestore
+    pick_random = random.uniform(0,2)
+    if pick_random >= 1:
+        titanic_df = survived_df
+        print("Survived added")
     else:
-        iris_df = setosa_df
-        print("Setosa added")
+        titanic_df = died_df
+        print("Died added")
 
-    return iris_df
+    return titanic_df
 
 
 
@@ -69,7 +110,7 @@ def g():
         titanic_df = pd.read_csv("https://raw.githubusercontent.com/ID2223KTH/id2223kth.github.io/master/assignments/lab1/titanic.csv")
         titanic_df = preprocessing_titanic(titanic_df)
     else:
-        iris_df = get_random_titanic_passenger()
+        titanic_df = get_random_titanic_passenger()
 
     titanic_fg = fs.get_or_create_feature_group(
         name="titanic_modal",
