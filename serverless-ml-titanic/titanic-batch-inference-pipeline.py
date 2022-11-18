@@ -100,8 +100,8 @@ def g():
     if predictions.value_counts().count() == 2:
         results = confusion_matrix(labels, predictions)
     
-        df_cm = pd.DataFrame(results, ['True Survived', 'True Died'],
-                             ['Pred Survived', 'Pred Died'])
+        df_cm = pd.DataFrame(results, ['True Died', 'True Survived'],
+                             ['Pred Died', 'Pred Survived'])
     
         cm = sns.heatmap(df_cm, annot=True)
         fig = cm.get_figure()
