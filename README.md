@@ -17,6 +17,9 @@ To create the dashboard UI, we firstly ran the [iris-batch-inference-pipeline.py
 
 ## Titanic survival dataset
 
+### Preprocessing
+Before storing the dataset on Hopsworks, we first had to preprocess the data. To this end, we firstly dropped some columns, such as 'name', that we deemed irrelevant to the prediction task. We then created a preprocessing pipeline that performs onehot encoding on nominal categorical features and then imputes any missing values with the mode (most frequent values). The details are shown in the [preprocessor_pipeline.py](https://github.com/Hope-Liang/ID2223Lab1/blob/main/serverless-ml-titanic/preprocessor_pipeline.py) file. The titanic dataset is now processed and ready for storage on Hopsworks.
+
 ## Links to Apps
 
 The links for the four pages: <br/>
