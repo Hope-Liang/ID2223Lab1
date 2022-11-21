@@ -1,3 +1,4 @@
 # ID2223Lab1
 
-HOPSWORKS_API_KEY - 5PY9hN1PYVdQbgYa.Omy5CMRdnPqY44N5VP6j1knWVrUbb6XntsLiHvzBUycQ2Caz9t4I4e8PeSudZo1o
+The links for the four pages:
+[Iris Interactive](https://huggingface.co/spaces/HopeLiang/huggingface-spaces-iris)
