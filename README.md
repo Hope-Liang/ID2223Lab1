@@ -15,6 +15,8 @@ To create the interactive UI on Hugging Face, we ran the [app.py](https://github
 To create the dashboard UI, we firstly ran the [iris-batch-inference-pipeline.py](https://github.com/Hope-Liang/ID2223Lab1/blob/main/serverless-ml-iris/iris-batch-inference-pipeline.py) file. This file loads the model from the Hopsworks Model Registry and then performs batch inference on data stored in the feature view on Hopsworks. It then uploads an image of the predicted flower type and an image of the actual flower type into a 'Resources/images' folder on Hopsworks as well as the 5 most recent predictions. This file is run multiple times until there are 3 different flower predictions to create the confusion matrix before finally uploading a confusion matrix to the same resources file outlying the historical model performance. Finally, the [app.py](https://github.com/Hope-Liang/ID2223Lab1/blob/main/serverless-ml-iris/huggingface-spaces-iris-monitor/app.py) creatures the dashboard UI on Hugging Face by showing all the images stored in the 'Resources/images' folder on Hopsworks, which includes the 5 most recent prediction history as well as the Confusion Maxtrix with Historical Prediction Performance.
 
 
+## Titanic survival dataset
+
 ## Links to Apps
 
 The links for the four pages: <br/>
