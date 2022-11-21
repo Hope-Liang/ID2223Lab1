@@ -2,7 +2,7 @@
 Authors: (GROUP 31) Khalid El Yaacoub, Xinyu Liang
 
 ## Introduction
-
+In this project, we ...
 
 
 ## Links to Apps
