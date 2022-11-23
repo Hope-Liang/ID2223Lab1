@@ -38,7 +38,7 @@ Finally, the [serverless-ml-titanic/huggingface-spaces-titanic-monitor/app.py](h
 
 ## Links to Apps
 
-The links for the four pages: <br/>
+The links for the four pages on Hugging Face: <br/>
 1. [Iris Interactive](https://huggingface.co/spaces/HopeLiang/huggingface-spaces-iris) <br/>
 2. [Iris Dashboard](https://huggingface.co/spaces/HopeLiang/huggingface-spaces-iris-monitor) <br/>
 3. [Titanic Interactive](https://huggingface.co/spaces/HopeLiang/huggingface-spaces-titanic) <br/>
