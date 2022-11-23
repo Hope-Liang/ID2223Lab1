@@ -2,7 +2,8 @@
 Authors: (GROUP 31) Khalid El Yaacoub, Xinyu Liang
 
 ## Introduction
-In this project, the goal was to build serverless ML systems using Hopsworks as a feature and model store, as well as using Hugging face as an interactive UI for our applications for the Iris Flowers dataset as well as a Titanic survival dataset. Both datasets are a classification problem where in the Iris flowers dataset the goal is to predict the type of flower based on some flower features while in the Titanic dataset the goal is to predict whether a passenger will survive (binary). Two UIs were created for each dataset. One interactive UI where users can input features values to obtain a prediction, and another dashboard UI showing the most recent prediction and the actual label for that prediction as well as a confusion matrix showing the historical model performance.
+In this project, the goal was to build serverless ML systems using a pipeline structure: Hopsworks as a feature and model store, Hugging face as an interactive UI to build applications for the Iris-Flowers dataset as well as a Titanic-survival dataset. Modal could be optionally used to schedule the data generation, model training and predictions, while it's not used in our case. Both datasets are used for classification tasks, where in the Iris flowers dataset the goal is to predict the type of flower based on some flower features, while in the Titanic dataset the goal is to predict whether a passenger will survive or not based on his (binary). <br/>
+Two UIs were created for each dataset. One interactive UI where users can input feature values to obtain a prediction, and another dashboard UI showing the most recent predictions results as well as a confusion matrix showing the historical model performance.
 
 ## Iris Flowers Dataset
 ### Feature & Model store on Hopsworks
